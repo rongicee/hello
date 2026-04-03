@@ -1,20 +1,24 @@
-name: 每日自动获取天气
+name: 每日自动获取天气（稳定国内接口）
 
 # 每天北京时间 08:00 自动运行
 on:
   schedule:
-    - cron: "0 0 * * *"  # UTC 0 点 = 北京 8 点
-  workflow_dispatch:     # 允许你手动点一下运行（测试用）
+    - cron: "0 0 * * *"
+  workflow_dispatch:     # 允许手动测试运行
 
 jobs:
   weather:
     runs-on: ubuntu-latest
     steps:
-      - name: 抓取并打印北京天气
+      - name: 获取北京天气
         run: |
-          # 调用免费天气 API
-          curl -s "https://wttr.in/Beijing?format=3"
+          echo "===================================="
+          echo "🌤  今日天气查询"
+          echo "===================================="
+          
+          # 调用稳定免费天气接口（北京）
+          curl -s "https://api.vvhan.com/api/weather?city=北京" | jq .
           
           echo "===================================="
-          echo "✅ 今日天气获取完成！GitHub 自动运行"
+          echo "✅ 天气获取成功！"
           echo "⏰ 运行时间: $(date '+%Y-%m-%d %H:%M:%S')"
