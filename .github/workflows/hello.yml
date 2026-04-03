@@ -1,0 +1,16 @@
+name: 我的第一个工作流
+
+on:
+  push:
+    branches: [ main ]  # 推送到 main 分支就自动跑
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 在云端 Ubuntu 上跑
+
+    steps:
+    - name: 打印一句话
+      run: echo "Hello GitHub Actions！我在云端自动运行啦"
+
+    - name: 查看系统信息
+      run: uname -a
