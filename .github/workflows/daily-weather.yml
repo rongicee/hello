@@ -1,0 +1,20 @@
+name: 每日自动获取天气
+
+# 每天北京时间 08:00 自动运行
+on:
+  schedule:
+    - cron: "0 0 * * *"  # UTC 0 点 = 北京 8 点
+  workflow_dispatch:     # 允许你手动点一下运行（测试用）
+
+jobs:
+  weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 抓取并打印北京天气
+        run: |
+          # 调用免费天气 API
+          curl -s "https://wttr.in/Beijing?format=3"
+          
+          echo "===================================="
+          echo "✅ 今日天气获取完成！GitHub 自动运行"
+          echo "⏰ 运行时间: $(date '+%Y-%m-%d %H:%M:%S')"
